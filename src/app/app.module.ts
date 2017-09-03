@@ -20,6 +20,7 @@ import { NoContentComponent } from './no-content';
 import { XLargeDirective } from './home/x-large';
 
 import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CovalentLayoutModule, CovalentStepsModule, CovalentPagingModule } from '@covalent/core';
 
 import '../styles/styles.scss';
@@ -58,7 +59,8 @@ type StoreType = {
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
     MaterialModule,
-    CovalentLayoutModule, CovalentStepsModule, CovalentPagingModule
+    CovalentLayoutModule, CovalentStepsModule, CovalentPagingModule,
+    BrowserAnimationsModule
   ],
   exports: [
     MaterialModule
