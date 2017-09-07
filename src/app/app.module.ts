@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 import { RouterModule, PreloadAllModules } from '@angular/router';
+import { NavigationComponent } from './navigation/navigation.component';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -49,6 +50,7 @@ type StoreType = {
     HomeComponent,
     NoContentComponent,
     XLargeDirective,
+    NavigationComponent,
   ],
   /**
    * Import Angular's modules.
@@ -60,7 +62,7 @@ type StoreType = {
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
     MaterialModule,
     CovalentLayoutModule,// CovalentStepsModule, CovalentPagingModule, CovalentCommonModule, CovalentDataTableModule, CovalentSearchModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   exports: [
     MaterialModule

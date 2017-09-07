@@ -4,6 +4,7 @@
 import { Component, ChangeDetectionStrategy, OnInit, ViewEncapsulation } from '@angular/core';
 import { AppState } from './app.service';
 import { MaterialModule } from '@angular/material';
+import { NavigationComponent } from './navigation/navigation.component';
 
 /**
  * App Component
@@ -28,7 +29,6 @@ export class AppComponent implements OnInit {
   public ngOnInit() {
     console.log('Initial App State', this.appState.state);
   }
-
 }
 
 /**
