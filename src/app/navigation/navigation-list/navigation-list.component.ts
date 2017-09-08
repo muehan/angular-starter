@@ -2,15 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppState } from './app.service';
 import { MaterialModule } from '@angular/material';
-import { NavigationListComponent } from './navigation-list';
   
 @Component({
-  selector: 'navigation',
-  styleUrls: ['navigation.component.css'],
-  templateUrl: 'navigation.component.html'
+  selector: 'navigation-list',
+  styleUrls: ['navigation-list.component.css'],
+  templateUrl: 'navigation-list.component.html'
 })
 
-export class NavigationComponent implements OnInit {
+export class NavigationListComponent implements OnInit {
 
   public localState: any;
   constructor(
@@ -27,7 +26,7 @@ export class NavigationComponent implements OnInit {
         this.localState = data.yourData;
       });
 
-    console.log('hello `Navigation` component');
+    console.log('hello `Navigation-list` component');
     /**
      * static data that is bundled
      * var mockData = require('assets/mock-data/mock-data.json');
@@ -44,7 +43,7 @@ export class NavigationComponent implements OnInit {
      */
     setTimeout(() => {
 
-      System.import('../../assets/mock-data/mock-data.json')
+      System.import('../../../assets/mock-data/mock-data.json')
         .then((json) => {
           console.log('async mockData', json);
           this.localState = json;
