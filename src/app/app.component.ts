@@ -6,6 +6,8 @@ import { AppState } from './app.service';
 import { MaterialModule } from '@angular/material';
 import { NavigationComponent } from './navigation/navigation.component';
 
+import { backgroundImage } from './bg8.jpg';
+
 /**
  * App Component
  * Top Level Component
