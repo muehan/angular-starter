@@ -1,17 +1,26 @@
 <td-layout>
-    <td-navigation-drawer flex sidenavTitle="AngularStarter" backgroundUrl="{{backgroundImage}}" logo="assets:teradata" name="Hans Muster" email="hans.muster@company.com">
+    <td-navigation-drawer flex sidenavTitle="Covalent" logo="assets:teradata" name="Firstname Lastname" email="firstname.lastname@company.com">
         <navigation></navigation>
+        <div td-navigation-drawer-menu>
+            <md-nav-list>
+                <a md-list-item><md-icon>account_box</md-icon>Profile</a>
+            </md-nav-list>
+        </div>
     </td-navigation-drawer>
-
-    <td-layout-nav logo="assets:teradata" toolbarTitle="Angular Starter Template" navigationRoute="/">
+    <td-layout-nav-list logo="assets:teradata" toolbarTitle="Covalent" navigationRoute="/" opened="true" mode="side">
         <button md-icon-button td-menu-button tdLayoutToggle>
             <md-icon>menu</md-icon>
         </button>
-        <div class="content">
-            <router-outlet>
-
-            </router-outlet>
+        <div td-sidenav-content>
+            Sidenav content here
         </div>
-    </td-layout-nav>
-
+        <div td-toolbar-content>
+            <button md-button tdLayoutNavListToggle>
+                Toggle
+            </button>
+        </div>
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+    </td-layout-nav-list>
 </td-layout>

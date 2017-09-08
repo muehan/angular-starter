@@ -8,6 +8,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 
 import { backgroundImage } from './bg8.jpg';
 
+import { TdLayoutNavListComponent } from '@covalent/core'; 
+
 /**
  * App Component
  * Top Level Component

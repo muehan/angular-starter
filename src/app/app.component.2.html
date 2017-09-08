@@ -1,0 +1,42 @@
+<td-layout>
+    <td-navigation-drawer flex sidenavTitle="AngularStarter" backgroundUrl="{{backgroundImage}}" logo="assets:teradata" name="Hans Muster" email="hans.muster@company.com">
+        <navigation></navigation>
+    </td-navigation-drawer>
+
+    <td-layout-nav logo="assets:teradata" toolbarTitle="Angular Starter Template" navigationRoute="/">
+        <button md-icon-button td-menu-button tdLayoutToggle>
+            <md-icon>menu</md-icon>
+        </button>
+
+        <md-sidenav mode="side" opened="true" #sidenav id="sidenav">
+            <div class="title">
+                <h3>
+                    <ng-content select="[logo]"></ng-content>
+                    <ng-content select="[title]"></ng-content>
+                </h3>
+            </div>
+            <md-divider></md-divider>
+            <!-- <navigation-user></navigation-user> -->
+            <md-divider></md-divider>
+            <md-nav-list dense>
+                <a md-list-item [routerLink]="home" routerLinkActive="active">
+                    <md-icon md-list-icon>Icon</md-icon>
+                    <span>Bezeichnung</span>
+                    <span class="fill-remaining-space"></span>
+                    <md-icon class="mat-icon-collapser">keyboard_arrow_right</md-icon>
+                </a>
+            </md-nav-list>
+            
+            <div class="fill-remaining-space-y"></div>
+            
+            <ng-content select="[sidenav-bottom]"></ng-content>
+        </md-sidenav>
+
+        <div class="content">
+            <router-outlet>
+
+            </router-outlet>
+        </div>
+    </td-layout-nav>
+
+</td-layout>

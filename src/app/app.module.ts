@@ -61,11 +61,12 @@ type StoreType = {
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
     MaterialModule,
-    CovalentLayoutModule,// CovalentStepsModule, CovalentPagingModule, CovalentCommonModule, CovalentDataTableModule, CovalentSearchModule,
+    CovalentLayoutModule, // CovalentStepsModule, CovalentPagingModule, CovalentCommonModule, CovalentDataTableModule, CovalentSearchModule,
     BrowserAnimationsModule,
   ],
   exports: [
-    MaterialModule
+    CovalentLayoutModule,
+    MaterialModule,
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.
