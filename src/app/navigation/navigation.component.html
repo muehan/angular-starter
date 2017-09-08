@@ -1,19 +1,47 @@
+<td-layout>
+    <td-navigation-drawer flex sidenavTitle="Covalent" logo="assets:teradata" name="Firstname Lastname" email="firstname.lastname@company.com">
 
-    <md-nav-list>
-        <a md-list-item [routerLink]=" ['./home'] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-            <md-icon>home</md-icon>Home
-        </a>
-        <a md-list-item [routerLink]=" ['./about'] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-            <md-icon>About</md-icon>About
-        </a>
-        <a md-list-item [routerLink]=" ['./about'] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-            <md-icon>About</md-icon>About
-        </a>
-    </md-nav-list>
-    <div td-navigation-drawer-menu>
         <md-nav-list>
-            <a md-list-item>
-                <md-icon>account_box</md-icon>Profile
+            <a md-list-item [routerLink]=" ['./home'] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <md-icon>home</md-icon>Home
+            </a>
+            <a md-list-item [routerLink]=" ['./about'] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <md-icon>About</md-icon>About
+            </a>
+            <a md-list-item [routerLink]=" ['./about'] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <md-icon>About</md-icon>About
             </a>
         </md-nav-list>
-    </div>
+        <div td-navigation-drawer-menu>
+            <md-nav-list>
+                <a md-list-item>
+                    <md-icon>account_box</md-icon>Profile
+                </a>
+            </md-nav-list>
+        </div>
+
+        <div td-navigation-drawer-menu>
+            <md-nav-list>
+                <a md-list-item>
+                    <md-icon>account_box</md-icon>Profile</a>
+            </md-nav-list>
+        </div>
+    </td-navigation-drawer>
+    <td-layout-nav-list logo="assets:teradata" toolbarTitle="Covalent" navigationRoute="/" opened="true" mode="side">
+        <button md-icon-button td-menu-button tdLayoutToggle>
+                <md-icon>menu</md-icon>
+            </button>
+        <div td-sidenav-content>
+            Sidenav content here
+        </div>
+        <div td-toolbar-content>
+            <button md-button tdLayoutNavListToggle>
+                    Toggle
+                </button>
+        </div>
+        <main>
+            <ng-content select="[content]"></ng-content>
+        </main>
+
+    </td-layout-nav-list>
+</td-layout>
