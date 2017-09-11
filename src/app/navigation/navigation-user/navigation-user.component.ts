@@ -1,25 +1,32 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AppState } from './app.service';
 import { MaterialModule } from '@angular/material';
-import { NavigationListComponent } from './navigation-list';
-import { NavigationUserComponent } from './navigation-user';
   
 @Component({
-  selector: 'navigation',
-  encapsulation: ViewEncapsulation.None,
-  styleUrls: ['navigation.component.css'],
-  templateUrl: 'navigation.component.html'
+  selector: 'navigation-user',
+  styleUrls: ['navigation-user.component.css'],
+  templateUrl: 'navigation-user.component.html'
 })
 
-export class NavigationComponent implements OnInit {
+export class NavigationUserComponent implements OnInit {
 
   public localState: any;
   constructor(
-    // constructor
+    public route: ActivatedRoute
   ) {}
 
   public ngOnInit() {
-    console.log('hello `Navigation` component');
+    this.route
+      .data
+      .subscribe((data: any) => {
+        /**
+         * Your resolved data from route.
+         */
+        this.localState = data.yourData;
+      });
+
+    console.log('hello `Navigation-user` component');
     /**
      * static data that is bundled
      * var mockData = require('assets/mock-data/mock-data.json');
@@ -28,7 +35,6 @@ export class NavigationComponent implements OnInit {
      */
     this.asyncDataWithWebpack();
   }
-
   private asyncDataWithWebpack() {
     /**
      * you can also async load mock data with 'es6-promise-loader'
@@ -37,7 +43,7 @@ export class NavigationComponent implements OnInit {
      */
     setTimeout(() => {
 
-      System.import('../../assets/mock-data/mock-data.json')
+      System.import('../../../assets/mock-data/mock-data.json')
         .then((json) => {
           console.log('async mockData', json);
           this.localState = json;
@@ -45,6 +51,5 @@ export class NavigationComponent implements OnInit {
 
     });
   }
-
 }
   

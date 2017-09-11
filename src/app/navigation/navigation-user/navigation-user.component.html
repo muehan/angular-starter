@@ -1,0 +1,33 @@
+<ng-container>
+    <div class="menu-button demo">
+        <button md-icon-button [mdMenuTriggerFor]="menuBenutzer">
+            <md-icon>account_circle</md-icon>
+            musth0
+        </button>
+    </div>
+
+    <md-menu class="menu-benutzer" #menuBenutzer="mdMenu" [overlapTrigger]="false">
+        <div class="wrapper" style="padding: 10px;">
+            <div class="user-info">
+                <md-icon class="image">account_circle</md-icon>
+
+                <div class="text">
+                    <div>
+                        <h3>Hans&nbsp;Muster</h3>
+
+                    </div>
+                    <div><span>musth0</span></div>
+                </div>
+            </div>
+            <md-divider></md-divider>
+            <div class="user-custom">
+                <ng-content></ng-content>
+            </div>
+            <md-divider></md-divider>
+            <div class="actions">
+                <button md-raised-button class="primary-button-flat">Abmelden</button>
+            </div>
+
+        </div>
+    </md-menu>
+</ng-container>

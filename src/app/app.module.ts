@@ -19,7 +19,8 @@ import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
 import { XLargeDirective } from './home/x-large';
 import { NavigationComponent } from './navigation/navigation.component';
-import { NavigationListComponent } from './navigation/navigation-list/navigation-list.component';
+import { NavigationListComponent } from './navigation/navigation-list';
+import { NavigationUserComponent } from './navigation/navigation-user';
 
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -53,6 +54,7 @@ type StoreType = {
     XLargeDirective,
     NavigationComponent,
     NavigationListComponent,
+    NavigationUserComponent,
   ],
   /**
    * Import Angular's modules.

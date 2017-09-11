@@ -6,9 +6,9 @@
         </button>
 
         <span class="fill-remaining-space"></span>
-
+        
         <!--Right side of toolbar-->
-        <ng-content select="[toolbar-actions]"></ng-content>
+        <ng-content style="float: right" select="[toolbar-actions]"></ng-content>
 
     </md-toolbar>
     <md-sidenav mode="side" opened="true" #sidenav id="sidenav">
@@ -22,66 +22,16 @@
             </h3>
         </div>
         <md-divider></md-divider>
-        <!-- <navigation-user></navigation-user> -->
-        <!-- user-->
-        <ng-container>
-            <div class="menu-button">
-                <button md-icon-button [mdMenuTriggerFor]="menuBenutzer">
-                    <md-icon>account_circle</md-icon>
-                    musth0
-                </button>
-            </div>
-
-            <md-menu class="menu-benutzer" #menuBenutzer="mdMenu" [overlapTrigger]="false">
-                <div class="wrapper">
-                    <div class="user-info">
-                        <md-icon class="image">account_circle</md-icon>
-
-                        <div class="text">
-                            <div>
-                                <h3>Hans&nbsp;Muster</h3>
-
-                            </div>
-                            <div><span>musth0</span></div>
-                        </div>
-                    </div>
-                    <md-divider></md-divider>
-                    <div class="user-custom">
-                        <ng-content></ng-content>
-                    </div>
-                    <md-divider></md-divider>
-                    <div class="actions">
-                        <button md-raised-button class="primary-button-flat">Abmelden</button>
-                    </div>
-
-                </div>
-            </md-menu>
-        </ng-container>
-
-        <!-- end user -->
-
+        <navigation-user></navigation-user>
 
         <md-divider></md-divider>
-        <!-- <md-nav-list dense>
-            <a md-list-item>
-
-                <md-icon md-list-icon>{{navItem.iconClass}}</md-icon>
-        <span>{{navItem.bezeichnung}}</span>
-        <span class="fill-remaining-space"></span>
-
-         <md-icon *ngIf="navItem.hasChildren" class="mat-icon-collapser" [@collapser]="navItem.childrenState">keyboard_arrow_right</md-icon>
-
-        </a>
-        </md-nav-list> -->
+        
         <navigation-list> </navigation-list>
 
         <div class="fill-remaining-space-y"></div>
 
-
     </md-sidenav>
     <div>
-
-
         <main>
             <ng-content select="[content]"></ng-content>
         </main>
