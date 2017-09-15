@@ -23,13 +23,14 @@ import { NavigationListComponent } from './navigation/navigation-list';
 import { NavigationUserComponent } from './navigation/navigation-user';
 import { TableBasicComponent } from './table-basic';
 import { InputComponent } from './inputs';
+import { DatepickerComponent } from './datepicker';
 
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
-import { DatepickerComponent } from './datepicker/datepicker.component';
+
 
 // Application wide providers
 const APP_PROVIDERS = [
