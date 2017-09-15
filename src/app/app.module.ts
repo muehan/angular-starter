@@ -21,6 +21,7 @@ import { XLargeDirective } from './home/x-large';
 import { NavigationComponent } from './navigation/navigation.component';
 import { NavigationListComponent } from './navigation/navigation-list';
 import { NavigationUserComponent } from './navigation/navigation-user';
+import { TableBasicComponent } from './table-basic';
 
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -54,6 +55,7 @@ type StoreType = {
     NavigationComponent,
     NavigationListComponent,
     NavigationUserComponent,
+    TableBasicComponent,
   ],
   /**
    * Import Angular's modules.
@@ -67,7 +69,6 @@ type StoreType = {
     BrowserAnimationsModule,
   ],
   exports: [
-    CovalentLayoutModule,
     MaterialModule,
   ],
   /**
