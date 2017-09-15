@@ -24,7 +24,6 @@ import { NavigationUserComponent } from './navigation/navigation-user';
 
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CovalentLayoutModule } from '@covalent/core'; //CovalentStepsModule, CovalentPagingModule, CovalentCommonModule, CovalentDataTableModule, CovalentSearchModule
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -65,7 +64,6 @@ type StoreType = {
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
     MaterialModule,
-    CovalentLayoutModule, // CovalentStepsModule, CovalentPagingModule, CovalentCommonModule, CovalentDataTableModule, CovalentSearchModule,
     BrowserAnimationsModule,
   ],
   exports: [
