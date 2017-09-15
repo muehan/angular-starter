@@ -22,6 +22,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { NavigationListComponent } from './navigation/navigation-list';
 import { NavigationUserComponent } from './navigation/navigation-user';
 import { TableBasicComponent } from './table-basic';
+import { InputComponent } from './inputs';
 
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -56,6 +57,7 @@ type StoreType = {
     NavigationListComponent,
     NavigationUserComponent,
     TableBasicComponent,
+    InputComponent,
   ],
   /**
    * Import Angular's modules.
