@@ -25,7 +25,7 @@ import { TableBasicComponent } from './table-basic';
 import { InputComponent } from './inputs';
 import { DatepickerComponent } from './datepicker';
 
-import { MaterialModule } from '@angular/material';
+import { MaterialModule, MdDatepickerModule, MdNativeDateModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import '../styles/styles.scss';
@@ -72,6 +72,8 @@ type StoreType = {
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
     MaterialModule,
     BrowserAnimationsModule,
+    MdDatepickerModule,
+    MdNativeDateModule,
   ],
   exports: [
     MaterialModule,
