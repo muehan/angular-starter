@@ -28,7 +28,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class OrderApi {
 
-    protected basePath = 'https://localhost';
+    protected basePath = 'https://coretemplate.apphb.com';
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 
