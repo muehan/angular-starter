@@ -3,6 +3,7 @@ import { HomeComponent } from './home';
 import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
 import { TableBasicComponent } from './table-basic';
+import { TableBasicApiComponent } from './table-basic-api';
 import { InputComponent } from './inputs';
 import { DatepickerComponent } from './datepicker';
 
@@ -15,6 +16,7 @@ export const ROUTES: Routes = [
   { path: 'input', component: InputComponent },
   { path: 'datepicker', component: DatepickerComponent },
   { path: 'tablebasic', component: TableBasicComponent },
+  { path: 'tablebasicapi', component: TableBasicApiComponent },
   { path: 'detail', loadChildren: './+detail#DetailModule'},
   { path: 'barrel', loadChildren: './+barrel#BarrelModule'},
   { path: '**',    component: NoContentComponent },

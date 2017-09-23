@@ -1,0 +1,45 @@
+<div class="example-container mat-elevation-z8">
+    <md-table #table [dataSource]="dataSource">
+
+        <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+        <ng-container mdColumnDef="guid">
+            <md-header-cell *mdHeaderCellDef> Guid </md-header-cell>
+            <md-cell *mdCellDef="let element"> {{element.guid}} </md-cell>
+        </ng-container>
+
+        <ng-container mdColumnDef="name">
+            <md-header-cell *mdHeaderCellDef> Name </md-header-cell>
+            <md-cell *mdCellDef="let element"> {{element.name}} </md-cell>
+        </ng-container>
+
+        <ng-container mdColumnDef="prename">
+            <md-header-cell *mdHeaderCellDef> PreName </md-header-cell>
+            <md-cell *mdCellDef="let element"> {{element.preName}} </md-cell>
+        </ng-container>
+
+        <ng-container mdColumnDef="street">
+            <md-header-cell *mdHeaderCellDef> Street </md-header-cell>
+            <md-cell *mdCellDef="let element"> {{element.street}} </md-cell>
+        </ng-container>
+
+        <ng-container mdColumnDef="streetnumber">
+            <md-header-cell *mdHeaderCellDef> StreetMo. </md-header-cell>
+            <md-cell *mdCellDef="let element"> {{element.streetNumber}} </md-cell>
+        </ng-container>
+
+        <ng-container mdColumnDef="zipcode">
+            <md-header-cell *mdHeaderCellDef> Zip </md-header-cell>
+            <md-cell *mdCellDef="let element"> {{element.zipCode}} </md-cell>
+        </ng-container>
+
+        <ng-container mdColumnDef="city">
+            <md-header-cell *mdHeaderCellDef> City </md-header-cell>
+            <md-cell *mdCellDef="let element"> {{element.city}} </md-cell>
+        </ng-container>
+
+        <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+        <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+    </md-table>
+</div>

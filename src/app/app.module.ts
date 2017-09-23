@@ -22,11 +22,14 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { NavigationListComponent } from './navigation/navigation-list';
 import { NavigationUserComponent } from './navigation/navigation-user';
 import { TableBasicComponent } from './table-basic';
+import { TableBasicApiComponent } from './table-basic-api';
 import { InputComponent } from './inputs';
 import { DatepickerComponent } from './datepicker';
 
 import { MaterialModule, MdDatepickerModule, MdNativeDateModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { CustomerApi } from './../api';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -59,6 +62,7 @@ type StoreType = {
     NavigationListComponent,
     NavigationUserComponent,
     TableBasicComponent,
+    TableBasicApiComponent,
     InputComponent,
     DatepickerComponent,
   ],
@@ -83,7 +87,8 @@ type StoreType = {
    */
   providers: [
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    CustomerApi,
   ]
 })
 export class AppModule {
