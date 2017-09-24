@@ -34,7 +34,6 @@ import { CustomerApi } from './../api';
 import '../styles/styles.scss';
 import '../styles/headings.css';
 
-
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,

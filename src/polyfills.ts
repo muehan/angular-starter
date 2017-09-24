@@ -38,6 +38,8 @@ import 'zone.js/dist/zone';
 
 import 'hammerjs/hammer';
 
+declare var require: any;
+
 if ('production' === ENV) {
   // Production
 
