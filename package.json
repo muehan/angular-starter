@@ -24,7 +24,7 @@
     "watch:test": "npm run test -- --auto-watch --no-single-run",
     "webpack-dev-server": "node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "webpack": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js",
-    "preinstall": "npm install -g webpack",
+    "preinstall": "npm install webpack",
     "postinstall": "npm run webpack -- --config config/webpack.prod.js  --progress --profile --bail"
   },
   "private": true,
