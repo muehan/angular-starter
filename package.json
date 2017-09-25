@@ -27,7 +27,7 @@
     "preinstall": "",
     "postinstall": "",
     "heroku-prebuild": "",
-    "heroku-postbuild": "npm install webpack webpack-merge assets-webpack-plugin && webpack -p --config config/webpack.prod.js --progress"
+    "heroku-postbuild": "npm install webpack webpack-merge assets-webpack-plugin copy-webpack-plugin && webpack -p --config config/webpack.prod.js --progress"
   },
   "private": true,
   "dependencies": {
