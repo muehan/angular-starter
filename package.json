@@ -5,7 +5,7 @@
     "main": "app.js",
     "scripts": {
         "ng": "ng",
-        "start": "./node_modules/webpack/bin/webpack.js -p --progress && node server.js",
+        "start": "node server.js",
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",
