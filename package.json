@@ -5,7 +5,7 @@
     "main": "app.js",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve",
+        "start": "./node_modules/webpack/bin/webpack.js -p --progress && node server.js",
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",
@@ -47,6 +47,7 @@
         "@angularclass/hmr": "^1.2.2",
         "@angularclass/hmr-loader": "^3.0.4",
         "core-js": "^2.4.1",
+        "express": "^4.15.5",
         "hammerjs": "^2.0.8",
         "http-server": "^0.9.0",
         "ie-shim": "^0.1.0",
