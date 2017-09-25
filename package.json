@@ -10,6 +10,9 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
+        "build:prod": "npm run clean:dist && npm run webpack -- --config config/webpack.prod.js  --progress --profile --bail",
+        "clean:dist": "npm run rimraf -- dist",
+        "rimraf": "rimraf",
         "dev": "npm run server:dev:hmr",
         "server:dev:hmr": "npm run server:dev -- --inline --hot",
         "server:dev": "npm run webpack-dev-server -- --config config/webpack.dev.js --open --progress --profile --watch --content-base src/",
@@ -22,7 +25,7 @@
         "webpack-dev-server": "node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js",
         "webpack": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js",
         "preinstall": "npm install -g @angular/cli",
-        "postinstall": "npm run build"
+        "postinstall": "npm run build:prod"
     },
     "private": true,
     "dependencies": {
