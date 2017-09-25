@@ -26,7 +26,8 @@
     "webpack": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js",
     "preinstall": "",
     "postinstall": "",
-    "heroku-postbuild": "npm install webpack && webpack -p --config config/webpack.prod.js --progress"
+    "heroku-prebuild": "",
+    "heroku-postbuild": "npm install && webpack -p --config config/webpack.prod.js --progress"
   },
   "private": true,
   "dependencies": {
