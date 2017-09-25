@@ -27,7 +27,7 @@
         "preinstall": "",
         "postinstall": "",
         "heroku-prebuild": "export NPM_CONFIG_PRODUCTION=false",
-        "heroku-postbuild": "npm install --dev && webpack -p --config config/webpack.prod.js --progress"
+        "heroku-postbuild": "npm install --dev && webpack --config config/webpack.prod.js --progress"
     },
     "private": true,
     "dependencies": {
