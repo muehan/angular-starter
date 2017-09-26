@@ -26,13 +26,14 @@ import { TableBasicApiComponent } from './table-basic-api';
 import { InputComponent } from './inputs';
 import { DatepickerComponent } from './datepicker';
 
-import { MaterialModule, MdDatepickerModule, MdNativeDateModule } from '@angular/material';
+import { MaterialModule, MdDatepickerModule, MdNativeDateModule, MdButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CustomerApi } from './../api';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
+import { CreateCustomerComponent } from './create-customer/create-customer.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -64,6 +65,7 @@ type StoreType = {
     TableBasicApiComponent,
     InputComponent,
     DatepickerComponent,
+    CreateCustomerComponent,
   ],
   /**
    * Import Angular's modules.
@@ -77,6 +79,7 @@ type StoreType = {
     BrowserAnimationsModule,
     MdDatepickerModule,
     MdNativeDateModule,
+    MdButtonModule,
   ],
   exports: [
     MaterialModule,
