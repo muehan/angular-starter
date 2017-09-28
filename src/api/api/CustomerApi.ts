@@ -45,7 +45,7 @@ export class CustomerApi {
      * 
      * @param id 
      */
-    public apiCustomerByIdDelete(id: number, extraHttpRequestParams?: any): Observable<models.CustomerDeleteResponse> {
+    public apiCustomerByIdDelete(id: string, extraHttpRequestParams?: any): Observable<models.CustomerDeleteResponse> {
         return this.apiCustomerByIdDeleteWithHttpInfo(id, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
@@ -76,7 +76,7 @@ export class CustomerApi {
      * @param id 
      * @param customerCommand 
      */
-    public apiCustomerByIdPut(id: number, customerCommand?: models.CustomerEditCommand, extraHttpRequestParams?: any): Observable<models.CustomerEditResponse> {
+    public apiCustomerByIdPut(id: string, customerCommand?: models.CustomerEditCommand, extraHttpRequestParams?: any): Observable<models.CustomerEditResponse> {
         return this.apiCustomerByIdPutWithHttpInfo(id, customerCommand, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
@@ -122,7 +122,7 @@ export class CustomerApi {
      * 
      * @param id 
      */
-    public apiCustomerByIdDeleteWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
+    public apiCustomerByIdDeleteWithHttpInfo(id: string, extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + '/api/Customer/${id}'
                     .replace('${' + 'id' + '}', String(id));
 
@@ -203,7 +203,7 @@ export class CustomerApi {
      * @param id 
      * @param customerCommand 
      */
-    public apiCustomerByIdPutWithHttpInfo(id: number, customerCommand?: models.CustomerEditCommand, extraHttpRequestParams?: any): Observable<Response> {
+    public apiCustomerByIdPutWithHttpInfo(id: string, customerCommand?: models.CustomerEditCommand, extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + '/api/Customer/${id}'
                     .replace('${' + 'id' + '}', String(id));
 

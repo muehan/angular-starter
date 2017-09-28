@@ -20,8 +20,13 @@ export class TableBasicApiComponent {
     
   }
 
-  displayedColumns = ['guid', 'name', 'prename', 'street', 'streetnumber', 'zipcode', 'city'];
+  displayedColumns = ['guid', 'name', 'prename', 'street', 'streetnumber', 'zipcode', 'city', 'func'];
   dataSource = new ExampleDataSource(this.customerApi);
+
+  delete(id) {
+    console.log('delete:' + id);
+    this.customerApi.apiCustomerByIdDelete(id).subscribe(response => console.log(response));
+  }
 }
 
 export class ExampleDataSource extends DataSource<any> {
