@@ -6,6 +6,7 @@ import { TableBasicComponent } from './table-basic';
 import { TableBasicApiComponent } from './table-basic-api';
 import { InputComponent } from './inputs';
 import { DatepickerComponent } from './datepicker';
+import { CreateCustomerComponent } from './create-customer';
 
 import { DataResolver } from './app.resolver';
 
@@ -16,6 +17,7 @@ export const ROUTES: Routes = [
   { path: 'input', component: InputComponent },
   { path: 'datepicker', component: DatepickerComponent },
   { path: 'tablebasic', component: TableBasicComponent },
+  { path: 'createcustomer', component: CreateCustomerComponent },
   { path: 'tablebasicapi', component: TableBasicApiComponent },
   { path: 'detail', loadChildren: './+detail#DetailModule'},
   { path: 'barrel', loadChildren: './+barrel#BarrelModule'},

@@ -1,3 +1,49 @@
-<p>
-  create-customer works!
-</p>
+<form class="example-form">
+    <md-form-field class="example-full-width">
+        <input mdInput [(ngModel)]="model.name" name="name" placeholder="Name" value="">
+    </md-form-field>
+    <md-form-field class="example-full-width">
+        <input mdInput [(ngModel)]="model.preName" name="preName" placeholder="Prename" value="">
+    </md-form-field>
+    <md-form-field class="example-full-width">
+        <input mdInput [(ngModel)]="model.phoneNumber" name="phone" placeholder="Phone" value="">
+    </md-form-field>
+
+    <table class="example-full-width" cellspacing="0">
+        <tr>
+            <td>
+                <md-form-field class="example-full-width">
+                    <input mdInput [(ngModel)]="model.street" name="street" placeholder="Street" value="">
+                </md-form-field>
+            </td>
+            <td>
+                <md-form-field class="example-full-width">
+                    <input mdInput [(ngModel)]="model.streetNumber" name="streetnumber" placeholder="Number" value="">
+                </md-form-field>
+            </td>
+        </tr>
+    </table>
+
+    <table class="example-full-width" cellspacing="0">
+        <tr>
+            <td>
+                <md-form-field class="example-full-width">
+                    <input mdInput [(ngModel)]="model.zipCode" name="zip" placeholder="Zip" value="">
+                </md-form-field>
+            </td>
+            <td>
+                <md-form-field class="example-full-width">
+                    <input mdInput [(ngModel)]="model.city" name="city" placeholder="City" value="">
+                </md-form-field>
+            </td>
+        </tr>
+    </table>
+    <md-form-field class="example-full-width">
+        <input mdInput [(ngModel)]="model.country" name="country" placeholder="Country" value="">
+    </md-form-field>
+
+</form>
+
+<div>
+    <button md-raised-button color="primary" (click)="save()">Save</button>
+</div>
