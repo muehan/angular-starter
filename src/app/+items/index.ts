@@ -1,1 +1,1 @@
-export * from './items.module';
+export { ItemsModule } from './items.module';

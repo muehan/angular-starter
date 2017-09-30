@@ -7,6 +7,7 @@ import { TableBasicApiComponent } from './table-basic-api';
 import { InputComponent } from './inputs';
 import { DatepickerComponent } from './datepicker';
 import { CreateCustomerComponent } from './create-customer';
+import { ItemsModule } from './+items';
 
 import { DataResolver } from './app.resolver';
 
@@ -19,7 +20,7 @@ export const ROUTES: Routes = [
   { path: 'tablebasic',       component: TableBasicComponent },
   { path: 'createcustomer',   component: CreateCustomerComponent },
   { path: 'tablebasicapi',    component: TableBasicApiComponent },
-  { path: 'items',            loadChildren: './+items#ItemModule' },
+  { path: 'items',            loadChildren: './+items#ItemsModule' },
   { path: 'detail',           loadChildren: './+detail#DetailModule'},
   { path: 'barrel',           loadChildren: './+barrel#BarrelModule'},
   { path: '**',               component: NoContentComponent },
