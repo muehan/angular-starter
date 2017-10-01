@@ -20,4 +20,7 @@
     <a md-list-item [routerLink]=" ['./items'] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
         <md-icon>I</md-icon>Item Module
     </a>
+    <a md-list-item [routerLink]=" ['./items/list'] " *ngIf="listModuleVisiable()" class="sub-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <md-icon>I</md-icon>List
+    </a>
 </md-nav-list>
