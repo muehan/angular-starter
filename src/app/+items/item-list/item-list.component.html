@@ -21,6 +21,13 @@
             <md-cell *mdCellDef="let element"> {{element.price}} </md-cell>
         </ng-container>
 
+        <ng-container mdColumnDef="func">
+            <md-header-cell *mdHeaderCellDef> </md-header-cell>
+            <md-cell *mdCellDef="let element">
+                <a [routerLink]="['/items/edit']">edit</a>
+            </md-cell>
+        </ng-container>
+
         <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
         <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
     </md-table>

@@ -17,7 +17,7 @@ export class ItemListComponent implements OnInit {
 
   }
 
-  displayedColumns = ['number', 'vendorNumber', 'name', 'price'];
+  displayedColumns = ['number', 'vendorNumber', 'name', 'price', 'func'];
   dataSource = new ExampleDataSource(this.itemApi);
 
   ngOnInit() {

@@ -9,13 +9,15 @@ import { ItemListComponent } from './item-list/item-list.component';
 import { ItemApi } from './../../api';
 
 import { routes } from './items.routes';
+import { ItemEditComponent } from './item-edit/item-edit.component';
 
 console.log('`items` bundle loaded asynchronously');
 
 @NgModule({
   declarations: [
     ItemsComponent,
-    ItemListComponent
+    ItemListComponent,
+    ItemEditComponent
   ],
   imports: [
     CommonModule,
