@@ -1,3 +1,32 @@
-<p>
-  item-edit works!
-</p>
+<h2>Edit item {{item.guid}}</h2>
+
+<form class="example-form">
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="number" name="number" [(ngModel)]="item.number">
+        </md-form-field>
+      </td>
+      <td>
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="vendor number" name="vendornumber" [(ngModel)]="item.venderNumber">
+        </md-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="price" name="price" [(ngModel)]="item.price">
+        </md-form-field>
+      </td>
+      <td>
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="name" name="name" [(ngModel)]="item.name">
+        </md-form-field>
+      </td>
+    </tr>
+  </table>
+
+  <button md-raised-button color="primary" (click)="save()">Add</button>
+</form>

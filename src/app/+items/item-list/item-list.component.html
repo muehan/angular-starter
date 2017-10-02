@@ -24,7 +24,7 @@
         <ng-container mdColumnDef="func">
             <md-header-cell *mdHeaderCellDef> </md-header-cell>
             <md-cell *mdCellDef="let element">
-                <a [routerLink]="['/items/edit']">edit</a>
+                <a [routerLink]="['/items/edit', element.guid]">edit</a>
             </md-cell>
         </ng-container>
 

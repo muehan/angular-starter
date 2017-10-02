@@ -6,6 +6,7 @@
     "scripts": {
         "api:local": "java -jar ./tools/swagger-codegen-cli-2.2.3.jar generate -i http://localhost:30110/swagger/v1/swagger.json -l typescript-angular2 -o ./src/api",
         "api:remote": "java -jar ./tools/swagger-codegen-cli-2.2.3.jar generate -i http://coretemplate.apphb.com/swagger/v1/swagger.json -l typescript-angular2 -o ./src/api",
+        "api:file": "java -jar ./tools/swagger-codegen-cli-2.2.3.jar generate -i swagger.json -l typescript-angular2 -o ./src/api",
         "ng": "ng",
         "start": "npm app.js",
         "build": "ng build",

@@ -1,0 +1,653 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "v1",
+        "title": "My API"
+    },
+    "host": "coretemplate.apphb.com",
+    "basePath": "/",
+    "paths": {
+        "/api/Customer": {
+            "get": {
+                "tags": [
+                    "Customer"
+                ],
+                "operationId": "ApiCustomerGet",
+                "consumes": [],
+                "produces": [
+                    "text/plain",
+                    "application/json",
+                    "text/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Customer"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Customer"
+                ],
+                "operationId": "ApiCustomerPost",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "text/plain",
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "customerCommand",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CustomerCreateCommand"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/CustomerCreateResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/Customer/{id}": {
+            "get": {
+                "tags": [
+                    "Customer"
+                ],
+                "operationId": "ApiCustomerByIdGet",
+                "consumes": [],
+                "produces": [
+                    "text/plain",
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Customer"
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Customer"
+                ],
+                "operationId": "ApiCustomerByIdPut",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "text/plain",
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "customerCommand",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CustomerEditCommand"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/CustomerEditResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Customer"
+                ],
+                "operationId": "ApiCustomerByIdDelete",
+                "consumes": [],
+                "produces": [
+                    "text/plain",
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/CustomerDeleteResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/Item": {
+            "get": {
+                "tags": [
+                    "Item"
+                ],
+                "operationId": "ApiItemGet",
+                "consumes": [],
+                "produces": [
+                    "text/plain",
+                    "application/json",
+                    "text/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ItemGetAllResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Item"
+                ],
+                "operationId": "ApiItemPut",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "text/plain",
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "command",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ItemEditCommand"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ItemEditResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Item"
+                ],
+                "operationId": "ApiItemPost",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "text/plain",
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "command",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ItemCreateCommand"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ItemCreateResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/Item/id": {
+            "get": {
+                "tags": [
+                    "Item"
+                ],
+                "operationId": "ApiItemIdGet",
+                "consumes": [],
+                "produces": [
+                    "text/plain",
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ItemGetResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/Item/{id}": {
+            "delete": {
+                "tags": [
+                    "Item"
+                ],
+                "operationId": "ApiItemByIdDelete",
+                "consumes": [],
+                "produces": [
+                    "text/plain",
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ItemDeleteResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/Order/{id}": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "operationId": "ApiOrderByIdGet",
+                "consumes": [],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Order"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/Order": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "operationId": "ApiOrderGet",
+                "consumes": [],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Order"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Customer": {
+            "type": "object",
+            "properties": {
+                "guid": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "number": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "preName": {
+                    "type": "string"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "street": {
+                    "type": "string"
+                },
+                "streetNumber": {
+                    "type": "string"
+                },
+                "zipCode": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                }
+            }
+        },
+        "CustomerCreateCommand": {
+            "type": "object",
+            "properties": {
+                "number": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "preName": {
+                    "type": "string"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "street": {
+                    "type": "string"
+                },
+                "streetNumber": {
+                    "type": "string"
+                },
+                "zipCode": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                }
+            }
+        },
+        "CustomerCreateResponse": {
+            "type": "object",
+            "properties": {
+                "customer": {
+                    "$ref": "#/definitions/Customer"
+                }
+            }
+        },
+        "CustomerEditCommand": {
+            "type": "object",
+            "properties": {
+                "guid": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "customer": {
+                    "$ref": "#/definitions/Customer"
+                }
+            }
+        },
+        "CustomerEditResponse": {
+            "type": "object",
+            "properties": {
+                "customer": {
+                    "$ref": "#/definitions/Customer"
+                }
+            }
+        },
+        "CustomerDeleteResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "format": "int32",
+                    "enum": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "type": "integer"
+                }
+            }
+        },
+        "ItemGetAllResponse": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Item"
+                    }
+                }
+            }
+        },
+        "Item": {
+            "type": "object",
+            "properties": {
+                "guid": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "number": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "venderNumber": {
+                    "type": "string"
+                },
+                "price": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "ItemCreateCommand": {
+            "type": "object",
+            "properties": {
+                "number": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "venderNumber": {
+                    "type": "string"
+                },
+                "price": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "ItemCreateResponse": {
+            "type": "object",
+            "properties": {
+                "item": {
+                    "$ref": "#/definitions/Item"
+                }
+            }
+        },
+        "ItemEditCommand": {
+            "type": "object",
+            "properties": {
+                "guid": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "item": {
+                    "$ref": "#/definitions/Item"
+                }
+            }
+        },
+        "ItemEditResponse": {
+            "type": "object",
+            "properties": {
+                "item": {
+                    "$ref": "#/definitions/Item"
+                }
+            }
+        },
+        "ItemGetResponse": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Item"
+                    }
+                }
+            }
+        },
+        "ItemDeleteResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "format": "int32",
+                    "enum": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "type": "integer"
+                }
+            }
+        },
+        "Order": {
+            "type": "object",
+            "properties": {
+                "guid": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "number": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "created": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "estimatedDeliveryDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "customer": {
+                    "$ref": "#/definitions/Customer"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/OrderItem"
+                    }
+                }
+            }
+        },
+        "OrderItem": {
+            "type": "object",
+            "properties": {
+                "guid": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "amount": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "item": {
+                    "$ref": "#/definitions/Item"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {}
+}

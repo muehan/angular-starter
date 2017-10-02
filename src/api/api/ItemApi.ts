@@ -28,7 +28,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class ItemApi {
 
-    protected basePath = 'http://localhost:30110';
+    protected basePath = 'https://coretemplate.apphb.com';
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 
@@ -58,41 +58,24 @@ export class ItemApi {
 
     /**
      * 
-     * @param id 
-     * @param queryText 
-     */
-    public apiItemByIdGet(id: string, queryText?: string, extraHttpRequestParams?: any): Observable<models.ItemGetResponse> {
-        return this.apiItemByIdGetWithHttpInfo(id, queryText, extraHttpRequestParams)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json() || {};
-                }
-            });
-    }
-
-    /**
-     * 
-     * @param id 
-     * @param command 
-     */
-    public apiItemByIdPut(id: number, command?: models.ItemEditCommand, extraHttpRequestParams?: any): Observable<models.ItemEditResponse> {
-        return this.apiItemByIdPutWithHttpInfo(id, command, extraHttpRequestParams)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json() || {};
-                }
-            });
-    }
-
-    /**
-     * 
      */
     public apiItemGet(extraHttpRequestParams?: any): Observable<models.ItemGetAllResponse> {
         return this.apiItemGetWithHttpInfo(extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
+    }
+
+    /**
+     * 
+     * @param id 
+     */
+    public apiItemIdGet(id?: string, extraHttpRequestParams?: any): Observable<models.ItemGetResponse> {
+        return this.apiItemIdGetWithHttpInfo(id, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -108,6 +91,21 @@ export class ItemApi {
      */
     public apiItemPost(command?: models.ItemCreateCommand, extraHttpRequestParams?: any): Observable<models.ItemCreateResponse> {
         return this.apiItemPostWithHttpInfo(command, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
+    }
+
+    /**
+     * 
+     * @param command 
+     */
+    public apiItemPut(command?: models.ItemEditCommand, extraHttpRequestParams?: any): Observable<models.ItemEditResponse> {
+        return this.apiItemPutWithHttpInfo(command, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -161,23 +159,12 @@ export class ItemApi {
     /**
      * 
      * 
-     * @param id 
-     * @param queryText 
      */
-    public apiItemByIdGetWithHttpInfo(id: string, queryText?: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + '/api/Item/${id}'
-                    .replace('${' + 'id' + '}', String(id));
+    public apiItemGetWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/api/Item';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling apiItemByIdGet.');
-        }
-        if (queryText !== undefined) {
-            queryParameters.set('QueryText', <any>queryText);
-        }
-
         // to determine the Content-Type header
         let consumes: string[] = [
         ];
@@ -207,59 +194,16 @@ export class ItemApi {
      * 
      * 
      * @param id 
-     * @param command 
      */
-    public apiItemByIdPutWithHttpInfo(id: number, command?: models.ItemEditCommand, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + '/api/Item/${id}'
-                    .replace('${' + 'id' + '}', String(id));
+    public apiItemIdGetWithHttpInfo(id?: string, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/api/Item/id';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling apiItemByIdPut.');
-        }
-        // to determine the Content-Type header
-        let consumes: string[] = [
-            'application/json-patch+json',
-            'application/json',
-            'text/json',
-            'application/_*+json'
-        ];
-
-        // to determine the Accept header
-        let produces: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
-        ];
-
-        headers.set('Content-Type', 'application/json');
-
-        let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Put,
-            headers: headers,
-            body: command == null ? '' : JSON.stringify(command), // https://github.com/angular/angular/issues/10612
-            search: queryParameters,
-            withCredentials:this.configuration.withCredentials
-        });
-        // https://github.com/swagger-api/swagger-codegen/issues/4037
-        if (extraHttpRequestParams) {
-            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        if (id !== undefined) {
+            queryParameters.set('id', <any>id);
         }
 
-        return this.http.request(path, requestOptions);
-    }
-
-    /**
-     * 
-     * 
-     */
-    public apiItemGetWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + '/api/Item';
-
-        let queryParameters = new URLSearchParams();
-        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
         // to determine the Content-Type header
         let consumes: string[] = [
         ];
@@ -314,6 +258,48 @@ export class ItemApi {
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Post,
+            headers: headers,
+            body: command == null ? '' : JSON.stringify(command), // https://github.com/angular/angular/issues/10612
+            search: queryParameters,
+            withCredentials:this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * 
+     * 
+     * @param command 
+     */
+    public apiItemPutWithHttpInfo(command?: models.ItemEditCommand, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/api/Item';
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json-patch+json',
+            'application/json',
+            'text/json',
+            'application/_*+json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+
+        headers.set('Content-Type', 'application/json');
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Put,
             headers: headers,
             body: command == null ? '' : JSON.stringify(command), // https://github.com/angular/angular/issues/10612
             search: queryParameters,
