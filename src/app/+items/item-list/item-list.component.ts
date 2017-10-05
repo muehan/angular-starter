@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { ItemApi, Item } from './../../../api';
+import { ItemApi, Item, ItemCreateCommand } from './../../../api';
 
 @Component({
   selector: 'app-item-list',
@@ -18,21 +18,40 @@ export class ItemListComponent implements OnInit {
   }
 
   displayedColumns = ['number', 'vendorNumber', 'name', 'price', 'func'];
-  dataSource = new ExampleDataSource(this.itemApi);
+
+  items = <BehaviorSubject<Item[]>>new BehaviorSubject([]);
+  dataSource = new ItemDataSource(this.items);
+  createModel = new ItemCreateModel();
 
   ngOnInit() {
+    this.itemApi.apiItemGet().map(data => data.items).subscribe(res => {
+      this.items.next(res);
+    });
+  }
+
+  createItem(){
+    this.itemApi.apiItemPost(this.createModel).subscribe(response => {
+      this.items.next(this.items.getValue().concat(response.item));
+    })
   }
 }
 
-export class ExampleDataSource extends DataSource<any> {
+export class ItemDataSource extends DataSource<any> {
 
-  constructor(private itemApi: ItemApi) {
+  constructor(private items: BehaviorSubject<Item[]>) {
     super();
   }
 
   connect(): Observable<Item[]> {
-    return this.itemApi.apiItemGet().map(response => response.items);
+    return this.items.asObservable();
   }
 
   disconnect() { }
+}
+
+class ItemCreateModel implements ItemCreateCommand {
+  name;
+  number;
+  price;
+  venderNumber
 }
