@@ -32,25 +32,25 @@
 <div style="margin-top: 25px;" class="example-container mat-elevation-z8">
     <div *ngIf="loading; else table">Loading</div>
     <ng-template #table>
-        <md-table #table [dataSource]="dataSource">
+        <md-table #table [dataSource]="dataSource" mdSort>
 
             <ng-container mdColumnDef="number">
-                <md-header-cell *mdHeaderCellDef> Number </md-header-cell>
+                <md-header-cell *mdHeaderCellDef md-sort-header> Number </md-header-cell>
                 <md-cell *mdCellDef="let element"> {{element.number}} </md-cell>
             </ng-container>
 
             <ng-container mdColumnDef="vendorNumber">
-                <md-header-cell *mdHeaderCellDef> Vendor Number </md-header-cell>
+                <md-header-cell *mdHeaderCellDef md-sort-header> Vendor Number </md-header-cell>
                 <md-cell *mdCellDef="let element"> {{element.venderNumber}} </md-cell>
             </ng-container>
 
             <ng-container mdColumnDef="name">
-                <md-header-cell *mdHeaderCellDef> Name </md-header-cell>
+                <md-header-cell *mdHeaderCellDef md-sort-header> Name </md-header-cell>
                 <md-cell *mdCellDef="let element"> {{element.name}} </md-cell>
             </ng-container>
 
             <ng-container mdColumnDef="price">
-                <md-header-cell *mdHeaderCellDef> Price </md-header-cell>
+                <md-header-cell *mdHeaderCellDef md-sort-header> Price </md-header-cell>
                 <md-cell *mdCellDef="let element"> {{element.price}} </md-cell>
             </ng-container>
 
