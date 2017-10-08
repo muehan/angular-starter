@@ -3,6 +3,7 @@ import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { MdSort } from '@angular/material';
+import { TableData } from './';
 
 import 'rxjs/add/observable/merge';
 
@@ -24,23 +25,30 @@ export class ItemListComponent implements OnInit {
   ) { }
 
   private displayedColumns: string[] = ['number', 'vendorNumber', 'name', 'price', 'func'];
-  private items: BehaviorSubject<Item[]> = <BehaviorSubject<Item[]>>new BehaviorSubject([]);
-  private dataSource: ItemDataSource;
+  //private items: BehaviorSubject<Item[]> = <BehaviorSubject<Item[]>>new BehaviorSubject([]);
+  //private dataSource: ItemDataSource;
   private createModel: ItemCreateModel = new ItemCreateModel();
   private loading: boolean = true;
 
+  private dataSourceExperiment: TableData<Item>;
+  private dataSource;
+
   ngOnInit() {
     this.itemApi.apiItemGet().map(data => data.items).subscribe(res => {
-      this.items.next(res);
+      
+      //this.items.next(res);
       this.loading = false;
       this.ref.detectChanges();
-      this.dataSource = new ItemDataSource(this.items, this.sort);
+      //this.dataSource = new ItemDataSource(this.items, this.sort);
+      this.dataSourceExperiment = new TableData<Item>(res, this.sort);
+      this.dataSource = this.dataSourceExperiment.getDataSource();
     });
   }
 
   createItem() {
     this.itemApi.apiItemPost(this.createModel).subscribe(response => {
-      this.items.next(this.items.getValue().concat(response.item));
+      //this.items.next(this.items.getValue().concat(response.item));
+      this.dataSourceExperiment.addItem(response.item);
       this.createModel = new ItemCreateModel();
     })
   }
