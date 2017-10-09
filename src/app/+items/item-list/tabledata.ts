@@ -64,6 +64,8 @@ class ItemDataSource<T> extends DataSource<any> {
             let propertyB: number | string = '';
             
             props.forEach(element => {
+                console.log(element);
+                console.log(this.sort.active);
                 if (element == this.sort.active) {
                     propertyA = a[element];
                     propertyB = b[element];

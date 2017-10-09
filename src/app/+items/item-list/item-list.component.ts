@@ -24,7 +24,7 @@ export class ItemListComponent implements OnInit {
     private ref: ChangeDetectorRef,
   ) { }
 
-  private displayedColumns: string[] = ['number', 'vendorNumber', 'name', 'price', 'func'];
+  private displayedColumns: string[] = ['number', 'venderNumber', 'name', 'price', 'func'];
   //private items: BehaviorSubject<Item[]> = <BehaviorSubject<Item[]>>new BehaviorSubject([]);
   //private dataSource: ItemDataSource;
   private createModel: ItemCreateModel = new ItemCreateModel();
