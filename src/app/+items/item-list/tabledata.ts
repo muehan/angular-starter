@@ -12,21 +12,21 @@ export class TableData<T extends Iitem> {
     private dataSource: ItemDataSource<T>;
     private items: BehaviorSubject<T[]> = <BehaviorSubject<T[]>>new BehaviorSubject([]);
 
-    constructor(private itemsArray: T[], private sort?: MdSort){
+    constructor(private itemsArray: T[], private sort?: MdSort) {
         this.items.next(itemsArray);
         this.dataSource = new ItemDataSource<T>(this.items, this.sort)
     }
 
-    public getDataSource(){
+    public getDataSource() {
         return this.dataSource;
     }
 
-    public addItem(item: T){
+    public addItem(item: T) {
         this.items.next(this.items.getValue().concat(item));
     }
 
-    public removeItem(id:string){
-        this.items.next(this.items.getValue().filter(function (data) { data.guid != id}));
+    public removeItem(id: string) {
+        this.items.next(this.items.getValue().filter(function (data) { data.guid != id }));
     }
 }
 
@@ -42,7 +42,6 @@ class ItemDataSource<T> extends DataSource<any> {
     ) { super(); }
 
     connect(): Observable<T[]> {
-        // return this.items.asObservable();
         const displayDataChanges = [
             this.items,
             this.sort.mdSortChange,
@@ -56,24 +55,27 @@ class ItemDataSource<T> extends DataSource<any> {
     disconnect() { }
 
     getSortedData(): T[] {
-        const data = this.items.value.slice();
+        const data: T[] = this.items.value.slice();
+        var props = Object.getOwnPropertyNames(data[0]);
         if (!this.sort.active || this.sort.direction == '') { return data; }
 
-        return data.sort((a, b) => {
+        var sortedData = data.sort((a, b) => {
             let propertyA: number | string = '';
             let propertyB: number | string = '';
-
-            switch (this.sort.active) {
-                // case 'number': [propertyA, propertyB] = [a.number, b.number]; break;
-                // case 'vendorNumber': [propertyA, propertyB] = [a.venderNumber, b.venderNumber]; break;
-                // case 'name': [propertyA, propertyB] = [a.name, b.name]; break;
-                // case 'price': [propertyA, propertyB] = [a.price, b.price]; break;
-            }
+            
+            props.forEach(element => {
+                if (element == this.sort.active) {
+                    propertyA = a[element];
+                    propertyB = b[element];
+                }
+            });
 
             let valueA = isNaN(+propertyA) ? propertyA : +propertyA;
             let valueB = isNaN(+propertyB) ? propertyB : +propertyB;
 
             return (valueA < valueB ? -1 : 1) * (this.sort.direction == 'asc' ? 1 : -1);
         });
+
+        return sortedData;
     }
 }
