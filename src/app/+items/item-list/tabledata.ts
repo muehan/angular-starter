@@ -18,10 +18,17 @@ export class DataTable<T extends Iitem> {
         this.dataSource = new ItemDataSource<T>(this.items, sort);
 
         if (filterlist) {
-            console.log('^filter list found');
-            filterlist.nativeElement.innerHtml = "<md-form-field>" +
-                "<input mdInput #filter placeholder='Filter'>" +
-                "</md-form-field>"
+
+            var props = Object.getOwnPropertyNames(itemsArray[0]);
+
+            var html = "";
+            props.forEach(element => {
+                html = html + "<md-form-field>" +
+                    "<input mdInput #filter placeholder=" + element + ">" +
+                    "</md-form-field>";
+            });
+
+            filterlist.nativeElement.innerHTML = html;
         }
     }
 
