@@ -24,6 +24,7 @@ export class ItemListComponent implements OnInit {
 
   @ViewChild(MdSort) sort: MdSort;
   @ViewChild('filter') filter: ElementRef;
+  @ViewChild('filterlist') filterlist: ElementRef;
 
   constructor(
     private itemApi: ItemApi,
@@ -39,7 +40,7 @@ export class ItemListComponent implements OnInit {
   ngOnInit() {
     this.itemApi.apiItemGet().map(data => data.items).subscribe(res => {
       this.loading = false;
-      this.dataTable = new DataTable<Item>(res, this.sort);
+      this.dataTable = new DataTable<Item>(res, this.sort, this.filterlist);
       this.ref.detectChanges();
     });
 

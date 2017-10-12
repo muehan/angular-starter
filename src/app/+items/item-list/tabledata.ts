@@ -1,4 +1,4 @@
-import { ViewChild } from '@angular/core';
+import { ViewChild, ElementRef } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -13,9 +13,16 @@ export class DataTable<T extends Iitem> {
     private dataSource: ItemDataSource<T>;
     private items: BehaviorSubject<T[]> = <BehaviorSubject<T[]>>new BehaviorSubject([]);
 
-    constructor(itemsArray: T[], sort?: MdSort) {
+    constructor(itemsArray: T[], sort?: MdSort, filterlist?: ElementRef) {
         this.items.next(itemsArray);
         this.dataSource = new ItemDataSource<T>(this.items, sort);
+
+        if (filterlist) {
+            console.log('^filter list found');
+            filterlist.nativeElement.innerHtml = "<md-form-field>" +
+                "<input mdInput #filter placeholder='Filter'>" +
+                "</md-form-field>"
+        }
     }
 
     public getDataSource() {
@@ -48,7 +55,6 @@ class ItemDataSource<T> extends DataSource<any> {
 
     connect(): Observable<T[]> {
         if (this.sort == null || this.sort == undefined) {
-            console.log('sort not found');
             return this.items.asObservable();
         }
 
@@ -60,9 +66,6 @@ class ItemDataSource<T> extends DataSource<any> {
 
         return Observable.merge(...displayDataChanges).map(() => {
             return this.getSortedData().slice().filter((item: T) => {
-
-                console.log('filter change');
-
                 var props = Object.getOwnPropertyNames(item);
 
                 let searchStr = "";

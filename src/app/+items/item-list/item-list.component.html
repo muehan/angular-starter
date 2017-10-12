@@ -35,6 +35,11 @@
             <input mdInput #filter placeholder="Filter">
         </md-form-field>
     </form>
+
+    <form #filterlist>
+
+    </form>
+
     <!-- <div *ngIf="loading; else table">Loading</div>
     <ng-template #table> -->
     <md-table [dataSource]="dataTable.getDataSource()" mdSort>
