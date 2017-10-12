@@ -1,11 +1,16 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { MdSort } from '@angular/material';
-import { TableData } from './';
+import { DataTable } from './';
 
 import 'rxjs/add/observable/merge';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/observable/fromEvent';
 
 import { ItemApi, Item, ItemCreateCommand } from './../../../api';
 
@@ -18,6 +23,7 @@ import { ItemApi, Item, ItemCreateCommand } from './../../../api';
 export class ItemListComponent implements OnInit {
 
   @ViewChild(MdSort) sort: MdSort;
+  @ViewChild('filter') filter: ElementRef;
 
   constructor(
     private itemApi: ItemApi,
@@ -25,76 +31,31 @@ export class ItemListComponent implements OnInit {
   ) { }
 
   private displayedColumns: string[] = ['number', 'venderNumber', 'name', 'price', 'func'];
-  //private items: BehaviorSubject<Item[]> = <BehaviorSubject<Item[]>>new BehaviorSubject([]);
-  //private dataSource: ItemDataSource;
   private createModel: ItemCreateModel = new ItemCreateModel();
   private loading: boolean = true;
 
-  private dataSourceExperiment: TableData<Item>;
-  private dataSource;
+  private dataTable: DataTable<Item> = new DataTable<Item>([]);
 
   ngOnInit() {
     this.itemApi.apiItemGet().map(data => data.items).subscribe(res => {
-      
-      //this.items.next(res);
       this.loading = false;
+      this.dataTable = new DataTable<Item>(res, this.sort);
       this.ref.detectChanges();
-      //this.dataSource = new ItemDataSource(this.items, this.sort);
-      this.dataSourceExperiment = new TableData<Item>(res, this.sort);
-      this.dataSource = this.dataSourceExperiment.getDataSource();
+    });
+
+    Observable.fromEvent(this.filter.nativeElement, 'keyup')
+    .debounceTime(150)
+    .distinctUntilChanged()
+    .subscribe(() => {
+      if(!this.dataTable.getDataSource()) { return }
+      this.dataTable.getDataSource().filter = this.filter.nativeElement.value;
     });
   }
 
   createItem() {
     this.itemApi.apiItemPost(this.createModel).subscribe(response => {
-      //this.items.next(this.items.getValue().concat(response.item));
-      this.dataSourceExperiment.addItem(response.item);
       this.createModel = new ItemCreateModel();
     })
-  }
-}
-
-export class ItemDataSource extends DataSource<any> {
-
-  constructor(
-    private items: BehaviorSubject<Item[]>,
-    private sort: MdSort
-  ) { super(); }
-
-  connect(): Observable<Item[]> {
-    // return this.items.asObservable();
-    const displayDataChanges = [
-      this.items,
-      this.sort.mdSortChange,
-    ];
-
-    return Observable.merge(...displayDataChanges).map(() => {
-      return this.getSortedData();
-    });
-  }
-
-  disconnect() { }
-
-  getSortedData(): Item[] {
-    const data = this.items.value.slice();
-    if (!this.sort.active || this.sort.direction == '') { return data; }
-
-    return data.sort((a, b) => {
-      let propertyA: number | string = '';
-      let propertyB: number | string = '';
-
-      switch (this.sort.active) {
-        case 'number': [propertyA, propertyB] = [a.number, b.number]; break;
-        case 'vendorNumber': [propertyA, propertyB] = [a.venderNumber, b.venderNumber]; break;
-        case 'name': [propertyA, propertyB] = [a.name, b.name]; break;
-        case 'price': [propertyA, propertyB] = [a.price, b.price]; break;
-      }
-
-      let valueA = isNaN(+propertyA) ? propertyA : +propertyA;
-      let valueB = isNaN(+propertyB) ? propertyB : +propertyB;
-
-      return (valueA < valueB ? -1 : 1) * (this.sort.direction == 'asc' ? 1 : -1);
-    });
   }
 }
 

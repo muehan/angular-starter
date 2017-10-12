@@ -48,6 +48,7 @@ class ItemDataSource<T> extends DataSource<any> {
 
     connect(): Observable<T[]> {
         if (this.sort == null || this.sort == undefined) {
+            console.log('sort not found');
             return this.items.asObservable();
         }
 
@@ -59,6 +60,8 @@ class ItemDataSource<T> extends DataSource<any> {
 
         return Observable.merge(...displayDataChanges).map(() => {
             return this.getSortedData().slice().filter((item: T) => {
+
+                console.log('filter change');
 
                 var props = Object.getOwnPropertyNames(item);
 
@@ -78,6 +81,7 @@ class ItemDataSource<T> extends DataSource<any> {
     disconnect() { }
 
     getSortedData(): T[] {
+        console.log('get sorted data');
         const data: T[] = this.items.value.slice();
         var props = Object.getOwnPropertyNames(data[0]);
         if (!this.sort.active || this.sort.direction == '') { return data; }

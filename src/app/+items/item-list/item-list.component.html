@@ -2,24 +2,24 @@
     <table class="example-full-width" cellspacing="0">
         <tr>
             <td>
-                <md-form-field class="example-full-width">
+                <md-form-field>
                     <input mdInput placeholder="number" name="number" [(ngModel)]="createModel.number">
                 </md-form-field>
             </td>
             <td>
-                <md-form-field class="example-full-width">
+                <md-form-field>
                     <input mdInput placeholder="vendor number" name="vendornumber" [(ngModel)]="createModel.venderNumber">
                 </md-form-field>
             </td>
         </tr>
         <tr>
             <td>
-                <md-form-field class="example-full-width">
+                <md-form-field>
                     <input mdInput placeholder="price" name="price" [(ngModel)]="createModel.price">
                 </md-form-field>
             </td>
             <td>
-                <md-form-field class="example-full-width">
+                <md-form-field>
                     <input mdInput placeholder="name" name="name" [(ngModel)]="createModel.name">
                 </md-form-field>
             </td>
@@ -30,39 +30,44 @@
 </form>
 
 <div style="margin-top: 25px;" class="example-container mat-elevation-z8">
-    <div *ngIf="loading; else table">Loading</div>
-    <ng-template #table>
-        <md-table #table [dataSource]="dataSource" mdSort>
+    <form class="example-form">
+        <md-form-field>
+            <input mdInput #filter placeholder="Filter">
+        </md-form-field>
+    </form>
+    <!-- <div *ngIf="loading; else table">Loading</div>
+    <ng-template #table> -->
+    <md-table [dataSource]="dataTable.getDataSource()" mdSort>
 
-            <ng-container mdColumnDef="number">
-                <md-header-cell *mdHeaderCellDef md-sort-header> Number </md-header-cell>
-                <md-cell *mdCellDef="let element"> {{element.number}} </md-cell>
-            </ng-container>
+        <ng-container mdColumnDef="number">
+            <md-header-cell *mdHeaderCellDef md-sort-header> Number </md-header-cell>
+            <md-cell *mdCellDef="let element"> {{element.number}} </md-cell>
+        </ng-container>
 
-            <ng-container mdColumnDef="venderNumber">
-                <md-header-cell *mdHeaderCellDef md-sort-header> Vendor Number </md-header-cell>
-                <md-cell *mdCellDef="let element"> {{element.venderNumber}} </md-cell>
-            </ng-container>
+        <ng-container mdColumnDef="venderNumber">
+            <md-header-cell *mdHeaderCellDef md-sort-header> Vendor Number </md-header-cell>
+            <md-cell *mdCellDef="let element"> {{element.venderNumber}} </md-cell>
+        </ng-container>
 
-            <ng-container mdColumnDef="name">
-                <md-header-cell *mdHeaderCellDef md-sort-header> Name </md-header-cell>
-                <md-cell *mdCellDef="let element"> {{element.name}} </md-cell>
-            </ng-container>
+        <ng-container mdColumnDef="name">
+            <md-header-cell *mdHeaderCellDef md-sort-header> Name </md-header-cell>
+            <md-cell *mdCellDef="let element"> {{element.name}} </md-cell>
+        </ng-container>
 
-            <ng-container mdColumnDef="price">
-                <md-header-cell *mdHeaderCellDef md-sort-header> Price </md-header-cell>
-                <md-cell *mdCellDef="let element"> {{element.price}} </md-cell>
-            </ng-container>
+        <ng-container mdColumnDef="price">
+            <md-header-cell *mdHeaderCellDef md-sort-header> Price </md-header-cell>
+            <md-cell *mdCellDef="let element"> {{element.price}} </md-cell>
+        </ng-container>
 
-            <ng-container mdColumnDef="func">
-                <md-header-cell *mdHeaderCellDef> </md-header-cell>
-                <md-cell *mdCellDef="let element">
-                    <a [routerLink]="['/items/edit', element.guid]">edit</a>
-                </md-cell>
-            </ng-container>
+        <ng-container mdColumnDef="func">
+            <md-header-cell *mdHeaderCellDef> </md-header-cell>
+            <md-cell *mdCellDef="let element">
+                <a [routerLink]="['/items/edit', element.guid]">edit</a>
+            </md-cell>
+        </ng-container>
 
-            <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
-            <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
-        </md-table>
-    </ng-template>
+        <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+        <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+    </md-table>
+    <!-- </ng-template> -->
 </div>
