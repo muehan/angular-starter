@@ -5,16 +5,17 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { MdSort } from '@angular/material';
 
 import 'rxjs/add/observable/merge';
+import 'rxjs/add/operator/map';
 
-export class TableData<T extends Iitem> {
+export class DataTable<T extends Iitem> {
 
     private type: T;
     private dataSource: ItemDataSource<T>;
     private items: BehaviorSubject<T[]> = <BehaviorSubject<T[]>>new BehaviorSubject([]);
 
-    constructor(private itemsArray: T[], private sort?: MdSort) {
+    constructor(itemsArray: T[], sort?: MdSort) {
         this.items.next(itemsArray);
-        this.dataSource = new ItemDataSource<T>(this.items, this.sort)
+        this.dataSource = new ItemDataSource<T>(this.items, sort);
     }
 
     public getDataSource() {
@@ -25,8 +26,8 @@ export class TableData<T extends Iitem> {
         this.items.next(this.items.getValue().concat(item));
     }
 
-    public removeItem(id: string) {
-        this.items.next(this.items.getValue().filter(function (data) { data.guid != id }));
+    public removeItem(guid: string) {
+        this.items.next(this.items.getValue().filter(function (data) { return data.guid !== guid }));
     }
 }
 
@@ -36,20 +37,42 @@ interface Iitem {
 
 class ItemDataSource<T> extends DataSource<any> {
 
+    _filterChange = new BehaviorSubject('');
+    get filter(): string { return this._filterChange.value; }
+    set filter(filter: string) { this._filterChange.next(filter); }
+
     constructor(
         private items: BehaviorSubject<T[]>,
         private sort: MdSort
     ) { super(); }
 
     connect(): Observable<T[]> {
+        if (this.sort == null || this.sort == undefined) {
+            return this.items.asObservable();
+        }
+
         const displayDataChanges = [
             this.items,
             this.sort.mdSortChange,
+            this._filterChange
         ];
 
         return Observable.merge(...displayDataChanges).map(() => {
-            return this.getSortedData();
+            return this.getSortedData().slice().filter((item: T) => {
+
+                var props = Object.getOwnPropertyNames(item);
+
+                let searchStr = "";
+                props.forEach(element => {
+                    searchStr = searchStr + item[element]
+                });
+
+                searchStr = searchStr.toLowerCase();
+
+                return searchStr.indexOf(this.filter.toLowerCase()) != -1;
+            });
         });
+
     }
 
     disconnect() { }
@@ -62,10 +85,9 @@ class ItemDataSource<T> extends DataSource<any> {
         var sortedData = data.sort((a, b) => {
             let propertyA: number | string = '';
             let propertyB: number | string = '';
-            
+
             props.forEach(element => {
-                console.log(element);
-                console.log(this.sort.active);
+
                 if (element == this.sort.active) {
                     propertyA = a[element];
                     propertyB = b[element];
