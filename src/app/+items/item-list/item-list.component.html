@@ -36,8 +36,10 @@
         </md-form-field>
     </form>
 
-    <form #filterlist>
-
+    <form class="filter-form" #filterlist>
+        <md-form-field class="input-filter" *ngFor="let column of displayedColumns">
+            <input mdInput placeholder="{{column}}">
+        </md-form-field>
     </form>
 
     <!-- <div *ngIf="loading; else table">Loading</div>

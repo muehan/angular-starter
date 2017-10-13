@@ -1,8 +1,8 @@
-import { ViewChild, ElementRef } from '@angular/core';
+import { ViewChild, ElementRef, Renderer2, ComponentFactoryResolver } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { MdSort } from '@angular/material';
+import { MdSort, MdInput } from '@angular/material';
 
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
@@ -19,16 +19,6 @@ export class DataTable<T extends Iitem> {
 
         if (filterlist) {
 
-            var props = Object.getOwnPropertyNames(itemsArray[0]);
-
-            var html = "";
-            props.forEach(element => {
-                html = html + "<md-form-field>" +
-                    "<input mdInput #filter placeholder=" + element + ">" +
-                    "</md-form-field>";
-            });
-
-            filterlist.nativeElement.innerHTML = html;
         }
     }
 

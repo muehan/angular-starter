@@ -1,8 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef, ViewEncapsulation, Renderer2, ComponentFactoryResolver } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { MdSort } from '@angular/material';
+import { MdSort, MdInput } from '@angular/material';
 import { DataTable } from './';
 
 import 'rxjs/add/observable/merge';
@@ -17,7 +17,8 @@ import { ItemApi, Item, ItemCreateCommand } from './../../../api';
 @Component({
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
-  styleUrls: ['./item-list.component.css']
+  styleUrls: ['./item-list.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 
 export class ItemListComponent implements OnInit {
@@ -29,6 +30,8 @@ export class ItemListComponent implements OnInit {
   constructor(
     private itemApi: ItemApi,
     private ref: ChangeDetectorRef,
+    private renderer: Renderer2,
+    private componentFacotry: ComponentFactoryResolver,
   ) { }
 
   private displayedColumns: string[] = ['number', 'venderNumber', 'name', 'price', 'func'];
