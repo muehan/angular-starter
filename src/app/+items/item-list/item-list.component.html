@@ -38,7 +38,7 @@
 
     <form class="filter-form" #filterlist>
         <md-form-field class="input-filter" *ngFor="let column of displayedColumns">
-            <input mdInput placeholder="{{column}}">
+            <input mdInput placeholder="{{column}}" fromControl>
         </md-form-field>
     </form>
 
