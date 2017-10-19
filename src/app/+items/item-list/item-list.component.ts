@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef, ViewEncapsulation, Renderer2, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -17,21 +17,18 @@ import { ItemApi, Item, ItemCreateCommand } from './../../../api';
 @Component({
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
-  styleUrls: ['./item-list.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./item-list.component.css']
 })
 
 export class ItemListComponent implements OnInit {
 
   @ViewChild(MdSort) sort: MdSort;
   @ViewChild('filter') filter: ElementRef;
-  @ViewChild('filterlist') filterlist: ElementRef;
+  @ViewChildren('filterlist') filterlist: QueryList<ElementRef>;
 
   constructor(
     private itemApi: ItemApi,
     private ref: ChangeDetectorRef,
-    private renderer: Renderer2,
-    private componentFacotry: ComponentFactoryResolver,
   ) { }
 
   private displayedColumns: string[] = ['number', 'venderNumber', 'name', 'price', 'func'];

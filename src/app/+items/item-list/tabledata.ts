@@ -1,4 +1,4 @@
-import { ViewChild, ElementRef, Renderer2, ComponentFactoryResolver } from '@angular/core';
+import { ViewChild, ElementRef, QueryList } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -6,6 +6,7 @@ import { MdSort, MdInput } from '@angular/material';
 
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/fromEvent';
 
 export class DataTable<T extends Iitem> {
 
@@ -13,11 +14,37 @@ export class DataTable<T extends Iitem> {
     private dataSource: ItemDataSource<T>;
     private items: BehaviorSubject<T[]> = <BehaviorSubject<T[]>>new BehaviorSubject([]);
 
-    constructor(itemsArray: T[], sort?: MdSort, filterlist?: ElementRef) {
+    constructor(itemsArray: T[], sort?: MdSort, filterlist?: QueryList<ElementRef>) {
         this.items.next(itemsArray);
         this.dataSource = new ItemDataSource<T>(this.items, sort);
 
         if (filterlist) {
+            filterlist.forEach(filterItem => {
+                Observable.fromEvent(filterItem.nativeElement, 'keyup')
+                    .debounceTime(150)
+                    .distinctUntilChanged()
+                    .subscribe(() => {
+                        var value = filterItem.nativeElement.value;
+                        var column = filterItem.nativeElement.placeholder;
+
+                        console.log("keyEvent '" + value + "' from: " + column);
+
+                        // all chars removed, remove filter from columnFilterArray
+                        if (value === '') {
+                            if(this.dataSource._columnfilter.some(x => x === column)){
+                                console.log('remove colum from current filter: ' + column);
+                                this.dataSource._columnfilter = this.dataSource._columnfilter.filter(item => item !== column);
+                            }
+                        } else {
+                            if (!this.dataSource._columnfilter.some(x => x === column)) {
+                                console.log("new column filter added");
+                                this.dataSource._columnfilter = this.dataSource._columnfilter.concat(column);
+                            }
+                        }
+
+                        this.dataSource.filter = value;
+                    })
+            });
 
         }
     }
@@ -45,6 +72,10 @@ class ItemDataSource<T> extends DataSource<any> {
     get filter(): string { return this._filterChange.value; }
     set filter(filter: string) { this._filterChange.next(filter); }
 
+    _columnfilter: string[] = [];
+    get columnfilter(): string[] { return this._columnfilter; }
+    set columnfilter(filter: string[]) { this._columnfilter = filter; }
+
     constructor(
         private items: BehaviorSubject<T[]>,
         private sort: MdSort
@@ -67,7 +98,14 @@ class ItemDataSource<T> extends DataSource<any> {
 
                 let searchStr = "";
                 props.forEach(element => {
-                    searchStr = searchStr + item[element]
+
+                    if (this._columnfilter.length == 0) {
+                        searchStr = searchStr + item[element]
+                    } else {
+                        if (this._columnfilter.some(x => x == element)) {
+                            searchStr = searchStr + item[element]
+                        }
+                    }
                 });
 
                 searchStr = searchStr.toLowerCase();
