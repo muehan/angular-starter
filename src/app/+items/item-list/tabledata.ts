@@ -31,18 +31,24 @@ export class DataTable<T extends Iitem> {
 
                         // all chars removed, remove filter from columnFilterArray
                         if (value === '') {
-                            if(this.dataSource._columnfilter.some(x => x === column)){
+                            if (this.dataSource.filters.some(x => x.column === column)) {
                                 console.log('remove colum from current filter: ' + column);
-                                this.dataSource._columnfilter = this.dataSource._columnfilter.filter(item => item !== column);
+                                this.dataSource.filters = this.dataSource.filters.filter(x => x.column !== column);
                             }
                         } else {
-                            if (!this.dataSource._columnfilter.some(x => x === column)) {
-                                console.log("new column filter added");
-                                this.dataSource._columnfilter = this.dataSource._columnfilter.concat(column);
+                            if (!this.dataSource.filters.some(x => x.column === column)) {
+                                // console.log("new column filter added");
+                                this.dataSource.filters = this.dataSource.filters.concat({column: column, value: value});
+                            } else {
+                                // console.log("add new value to existing filter: " + column + " - " + value);
+                                var existingFilter = this.dataSource.filters.find(x => x.column === column);
+
+                                this.dataSource.filters = this.dataSource.filters.filter(x => x.column !== column);
+                                this.dataSource.filters = this.dataSource.filters.concat({column: column, value: value});
+
+                                var existingFilter = this.dataSource.filters.find(x => x.column === column);
                             }
                         }
-
-                        this.dataSource.filter = value;
                     })
             });
 
@@ -66,15 +72,24 @@ interface Iitem {
     guid?: string;
 }
 
+interface ISearchFilter {
+    column: string;
+    value: string;
+}
+
 class ItemDataSource<T> extends DataSource<any> {
 
-    _filterChange = new BehaviorSubject('');
-    get filter(): string { return this._filterChange.value; }
-    set filter(filter: string) { this._filterChange.next(filter); }
+    private _filters: BehaviorSubject<ISearchFilter[]> = <BehaviorSubject<ISearchFilter[]>>new BehaviorSubject([]);
+    get filters(): ISearchFilter[] { return this._filters.value }
+    set filters(filter: ISearchFilter[]) { this._filters.next(filter); }
 
-    _columnfilter: string[] = [];
-    get columnfilter(): string[] { return this._columnfilter; }
-    set columnfilter(filter: string[]) { this._columnfilter = filter; }
+    // _filterChange = new BehaviorSubject('');
+    // get filter(): string { return this._filterChange.value; }
+    // set filter(filter: string) { this._filterChange.next(filter); }
+
+    // _columnfilter: string[] = [];
+    // get columnfilter(): string[] { return this._columnfilter; }
+    // set columnfilter(filter: string[]) { this._columnfilter = filter; }
 
     constructor(
         private items: BehaviorSubject<T[]>,
@@ -89,29 +104,36 @@ class ItemDataSource<T> extends DataSource<any> {
         const displayDataChanges = [
             this.items,
             this.sort.mdSortChange,
-            this._filterChange
+            this._filters
         ];
 
         return Observable.merge(...displayDataChanges).map(() => {
             return this.getSortedData().slice().filter((item: T) => {
-                var props = Object.getOwnPropertyNames(item);
+                
+                var show = true;
 
-                let searchStr = "";
-                props.forEach(element => {
+                this.filters.forEach(filterElement => {
+                    console.log(item[filterElement.column].toString().toLowerCase());
+                    console.log(filterElement.value.toLowerCase());
 
-                    if (this._columnfilter.length == 0) {
-                        searchStr = searchStr + item[element]
-                    } else {
-                        if (this._columnfilter.some(x => x == element)) {
-                            searchStr = searchStr + item[element]
-                        }
-                    }
-                });
-
-                searchStr = searchStr.toLowerCase();
-
-                return searchStr.indexOf(this.filter.toLowerCase()) != -1;
+                    if(item[filterElement.column].toString().toLowerCase().indexOf(filterElement.value.toLowerCase()) == -1){
+                        show = false;
+                    }   
+                })
+                console.log(show);
+                return show;
             });
+
+            // var props = Object.getOwnPropertyNames(item);
+            
+            // let searchStr = "";
+            // props.forEach(element => {
+            //     searchStr = searchStr + item[element]
+            // });
+
+            // searchStr = searchStr.toLowerCase();
+
+            // return searchStr.indexOf(this.filter.toLowerCase()) != -1;
         });
 
     }
